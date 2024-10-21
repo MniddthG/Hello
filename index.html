@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmY2cTUxc3dsbjEycHlldWYzZDlhc3VqN2MzNWt4NGw5dm1nN3djbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U3qYN8S0j3bpK/giphy.gif");
+            background-size: cover;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden; /* Ngăn không cho thanh cuộn */
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 20px; /* Thêm padding để không chèn sát các cạnh */
+        }
+        .message {
+            font-size: 3em; /* Tăng kích thước chữ */
+            color: pink;
+            margin-right: 20px;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        .gif {
+            width: 400px; /* Tăng kích thước GIF */
+            height: auto;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        .audio {
+            display: none; /* Ẩn âm thanh ban đầu */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message" id="message"></div>
+        <img class="gif" id="gif" src="" alt="Birthday GIF">
+    </div>
+
+    <audio class="audio" id="audio" autoplay loop>
+        <source src="https://www.myinstants.com/media/sounds/happy-birthday-1.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ phát âm thanh.
+    </audio>
+
+    <script>
+        const messages = [
+            { text: "Happy birthday my lovely Unnie!", gif: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzZ3eXkwdzQxYXNqMjJ2OG9tbXRrZWV5anRwMmpiZjUxZzI0c3FmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gxxiyXnFw9aorS8vkB/giphy.gif" },
+            { text: "I hope you'll own the world", gif: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzRwa3Zqc3A2dnFrdzF2ajVhNWhnNnd0YTIwMjU5NTZjZndwbm9tdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5RLSmlxtwkapyKLbCS/giphy.gif" },
+            { text: "Thank you for being here for me!", gif: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExemNpOGl5b2kydDliaGp0d3N1dmFodnR5dG1nbWtuOWJuNHQ0bm4ydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZTnc4iHilf8u7sbJ2H/giphy.gif" },
+            { text: "I love you! 정말 좋아해요!", gif: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExempheHR4Z2VtY2k0Ym1xdngxaGU4OGNwdDAzYmV4M3F0MTRua3R2MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VMdEnfC0EO40IlqJyr/giphy.gif" },
+        ];
+
+        let currentIndex = 0;
+
+        function showMessage() {
+            if (currentIndex < messages.length) {
+                const message = messages[currentIndex];
+                const messageElement = document.getElementById('message');
+                const gifElement = document.getElementById('gif');
+
+                messageElement.innerText = message.text;
+                gifElement.src = message.gif;
+
+                // Để từ từ biến mất
+                messageElement.style.opacity = 1;
+                gifElement.style.opacity = 1;
+
+                setTimeout(() => {
+                    // Biến mất sau 3 giây
+                    messageElement.style.opacity = 0;
+                    gifElement.style.opacity = 0;
+
+                    // Chờ 1 giây trước khi hiện thông điệp tiếp theo
+                    setTimeout(() => {
+                        currentIndex++;
+                        showMessage();
+                    }, 1000);
+                }, 3000);
+            }
+        }
+
+        // Bắt đầu phát âm thanh và hiển thị thông điệp
+        document.getElementById('audio').play();
+        showMessage();
+    </script>
+</body>
+</html>
